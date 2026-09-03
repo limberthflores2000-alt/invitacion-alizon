@@ -398,11 +398,11 @@
             border-radius: 25px; overflow: hidden;
             box-shadow: 0 15px 50px rgba(233, 30, 140, 0.15);
             border: 3px solid var(--dorado-claro);
-            max-width: 900px; margin: 0 auto;
+            max-width: 400px; width: 100%; margin: 0 auto;
         }
         .video-container {
             position: relative; width: 100%;
-            padding-bottom: 56.25%;
+            padding-bottom: 177.78%;
             background: linear-gradient(135deg, #2a0a1a, #4a0e2e);
             overflow: hidden;
         }
@@ -418,16 +418,16 @@
             background: linear-gradient(135deg, #2a0a1a, #4a0e2e);
             color: white; cursor: pointer;
             transition: opacity 0.5s ease;
-            z-index: 10;
+            z-index: 10; padding: 20px; text-align: center;
         }
         .video-placeholder.hidden {
             opacity: 0; pointer-events: none;
         }
         .play-button {
-            width: 90px; height: 90px; border-radius: 50%;
+            width: 80px; height: 80px; border-radius: 50%;
             background: linear-gradient(135deg, var(--rosa-principal), var(--purpura));
             display: flex; align-items: center; justify-content: center;
-            font-size: 2.5rem; color: white;
+            font-size: 2.2rem; color: white;
             box-shadow: 0 0 30px rgba(233, 30, 140, 0.5);
             transition: all 0.3s ease;
             margin-bottom: 20px;
@@ -435,16 +435,16 @@
         .play-button:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(233, 30, 140, 0.7); }
         .placeholder-text {
             font-family: 'Playfair Display', serif;
-            font-size: 1.2rem; color: var(--rosa-pastel);
+            font-size: 1.1rem; color: var(--rosa-pastel);
         }
-        .video-info { padding: 30px; text-align: center; }
+        .video-info { padding: 25px 20px; text-align: center; }
         .video-title {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 1.6rem; color: var(--purpura); margin-bottom: 10px;
+            font-size: 1.5rem; color: var(--purpura); margin-bottom: 8px;
         }
         .video-desc {
             font-family: 'Poppins', sans-serif;
-            color: #777; font-size: 0.95rem;
+            color: #777; font-size: 0.9rem;
         }
 
         /* ===== FOOTER ===== */
