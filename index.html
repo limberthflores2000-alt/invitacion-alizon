@@ -418,6 +418,7 @@
             background: linear-gradient(135deg, #2a0a1a, #4a0e2e);
             color: white; cursor: pointer;
             transition: opacity 0.5s ease;
+            z-index: 10;
         }
         .video-placeholder.hidden {
             opacity: 0; pointer-events: none;
@@ -475,7 +476,6 @@
             .countdown-item { min-width: 70px; padding: 15px 10px; }
         }
 
-        /* Animación de entrada */
         .fade-in-up {
             opacity: 0; transform: translateY(40px);
             transition: all 0.8s ease;
@@ -500,7 +500,7 @@
     </button>
 
     <!-- Audio de fondo -->
-    <audio id="bgMusic" loop>
+    <audio id="bgMusic" loop autoplay>
         <source src="musica-fondo.mp3" type="audio/mpeg">
         Tu navegador no soporta audio HTML5.
     </audio>
@@ -545,7 +545,7 @@
                 <div class="event-details fade-in-up delay-4">
                     <p class="event-date">
                         <i class="bi bi-calendar-heart" style="color: var(--rosa-principal);"></i>
-                        Sábado 16 de Septiembre · 16:00 p.m.
+                        Sábado 5 de Septiembre · 16:00 p.m.
                     </p>
                     <p class="event-location">
                         <strong>Salón de Eventos Sociales "J y M"</strong><br>
@@ -625,6 +625,7 @@
 
         <div class="video-card fade-in-up">
             <div class="video-container" id="videoContainer">
+                <div id="youtubePlayer"></div>
                 <div class="video-placeholder" id="videoPlaceholder">
                     <div class="play-button">
                         <i class="bi bi-play-fill"></i>
@@ -652,8 +653,9 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS y API de YouTube -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
         // ===== GENERAR ESTRELLAS =====
@@ -677,28 +679,50 @@
         const bgMusic = document.getElementById('bgMusic');
         let isPlaying = false;
 
-        musicBtn.addEventListener('click', function() {
+        function playBgMusic() {
+            bgMusic.play().then(() => {
+                musicBtn.classList.add('playing');
+                musicIcon.className = 'bi bi-pause-fill';
+                isPlaying = true;
+            }).catch(err => {
+                console.log('Autoplay bloqueado hasta interacción:', err);
+            });
+        }
+
+        function pauseBgMusic() {
+            bgMusic.pause();
+            musicBtn.classList.remove('playing');
+            musicIcon.className = 'bi bi-music-note-beamed';
+            isPlaying = false;
+        }
+
+        // Intenta iniciar la música automáticamente
+        window.addEventListener('load', () => {
+            playBgMusic();
+        });
+
+        // Alternativa de interacción si el navegador bloqueó el autoplay sin clic previo
+        document.body.addEventListener('click', function startOnFirstInteraction() {
+            if (!isPlaying) {
+                playBgMusic();
+            }
+            document.body.removeEventListener('click', startOnFirstInteraction);
+        }, { once: true });
+
+        // Botón flotante para alternar la música
+        musicBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
             if (isPlaying) {
-                bgMusic.pause();
-                musicBtn.classList.remove('playing');
-                musicIcon.className = 'bi bi-music-note-beamed';
-                isPlaying = false;
+                pauseBgMusic();
             } else {
-                bgMusic.play().then(() => {
-                    musicBtn.classList.add('playing');
-                    musicIcon.className = 'bi bi-pause-fill';
-                    isPlaying = true;
-                }).catch(err => {
-                    console.log('Error al reproducir:', err);
-                    alert('No se pudo reproducir la música. Asegúrate de tener el archivo musica-fondo.mp3 en la misma carpeta que index.html');
-                });
+                playBgMusic();
             }
         });
 
-        // ===== CUENTA REGRESIVA CORREGIDA =====
+        // ===== CUENTA REGRESIVA =====
         function updateCountdown() {
-            // Fecha y hora exacta corregida: 16 de Septiembre de 2026 a las 16:00 PM
-            const targetDate = new Date('2026-09-16T16:00:00');
+            // Fecha exacta: 5 de Septiembre de 2026 a las 16:00 PM
+            const targetDate = new Date('2026-09-05T16:00:00');
             const now = new Date();
             const diff = targetDate - now;
 
@@ -744,35 +768,40 @@
             observer.observe(el);
         });
 
-        // ===== VIDEO LAZY LOAD =====
-        const videoSection = document.getElementById('video');
-        const videoContainer = document.getElementById('videoContainer');
+        // ===== REPRODUCTOR YOUTUBE E INTEGRACIÓN DE SILENCIADO =====
         const videoPlaceholder = document.getElementById('videoPlaceholder');
-        const youtubeVideoId = 'qlBsuKNYOcU';
-        let videoLoaded = false;
+        const youtubeVideoId = '2vqz2PPPX9c';
+        let player;
 
-        const videoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !videoLoaded) {
-                    videoLoaded = true;
-                    const iframe = document.createElement('iframe');
-                    iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`;
-                    iframe.title = 'Video de Invitación - 15 Años Alizon Mamani Rodriguez';
-                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-                    iframe.allowFullscreen = true;
-                    iframe.loading = 'lazy';
-
-                    videoPlaceholder.addEventListener('click', function() {
-                        videoPlaceholder.classList.add('hidden');
-                        iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1`;
-                    });
-
-                    videoContainer.appendChild(iframe);
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtubePlayer', {
+                height: '100%',
+                width: '100%',
+                videoId: youtubeVideoId,
+                playerVars: {
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onStateChange': onPlayerStateChange
                 }
             });
-        }, { threshold: 0.1 });
+        }
 
-        videoObserver.observe(videoSection);
+        function onPlayerStateChange(event) {
+            // Si el video de YouTube comienza a reproducirse (Estado 1 = PLAYING)
+            if (event.data === YT.PlayerState.PLAYING) {
+                pauseBgMusic();
+            }
+        }
+
+        videoPlaceholder.addEventListener('click', function() {
+            videoPlaceholder.classList.add('hidden');
+            pauseBgMusic();
+            if (player && player.playVideo) {
+                player.playVideo();
+            }
+        });
 
         // ===== SMOOTH SCROLL =====
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
