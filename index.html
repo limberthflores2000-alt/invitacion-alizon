@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Invitación 15 Años - Alizon Mamani Rodriguez ✨</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --rosa-principal: #e91e8c;
+            --rosa-claro: #fce4ec;
+            --rosa-pastel: #f8bbd0;
+            --rosa-oscuro: #c2185b;
+            --dorado: #d4af37;
+            --dorado-claro: #f4e4a6;
+            --purpura: #9c27b0;
+            --purpura-claro: #e1bee7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 25%, #e1bee7 50%, #f8bbd0 75%, #fce4ec 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== FONDO ESTRELLAS ===== */
+        .stars-bg {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--dorado); border-radius: 50%;
+            animation: twinkle 3s infinite ease-in-out;
+            box-shadow: 0 0 6px var(--dorado), 0 0 12px var(--dorado-claro);
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* ===== BOTÓN MÚSICA FLOTANTE ===== */
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px; height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rosa-principal), var(--purpura));
+            border: 3px solid var(--dorado-claro);
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 5px 20px rgba(233, 30, 140, 0.4);
+            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(233, 30, 140, 0.6);
+        }
+        .music-btn.playing {
+            animation: spin-music 3s linear infinite;
+        }
+        @keyframes spin-music {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .music-btn .music-wave {
+            position: absolute;
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            border: 2px solid var(--dorado);
+            opacity: 0;
+            animation: wave-pulse 2s infinite;
+        }
+        .music-btn.playing .music-wave {
+            opacity: 0.6;
+        }
+        @keyframes wave-pulse {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+
+        /* ===== DIVISOR CORONA ===== */
+        .crown-divider {
+            text-align: center; margin: 20px 0; position: relative;
+        }
+        .crown-divider::before, .crown-divider::after {
+            content: '';
+            position: absolute; top: 50%;
+            width: 35%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--dorado), transparent);
+        }
+        .crown-divider::before { left: 5%; }
+        .crown-divider::after { right: 5%; }
+        .crown-divider i {
+            font-size: 2.5rem; color: var(--dorado);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* ===== HERO ===== */
+        .hero-section {
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 1;
+            padding: 40px 20px;
+        }
+        .invitation-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 30px;
+            padding: 50px 40px;
+            max-width: 800px; width: 100%;
+            box-shadow: 0 20px 60px rgba(233, 30, 140, 0.2),
+                        0 0 0 4px var(--dorado-claro),
+                        inset 0 0 30px rgba(255, 255, 255, 0.5);
+            position: relative; overflow: hidden;
+            text-align: center; border: 3px solid var(--dorado);
+        }
+        .invitation-card::before {
+            content: '';
+            position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .card-content { position: relative; z-index: 2; }
+
+        .top-crown {
+            font-size: 3.5rem; color: var(--dorado);
+            margin-bottom: 10px; display: block;
+            animation: float 3s ease-in-out infinite;
+            text-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .title-15 {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 5rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--rosa-principal), var(--purpura), var(--rosa-oscuro));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 10px 0; line-height: 1.1;
+        }
+        .title-years {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem; color: var(--dorado);
+            margin-top: -10px; letter-spacing: 3px;
+        }
+
+        .blessing-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem; color: #555;
+            line-height: 1.9; margin: 30px auto;
+            max-width: 600px; font-style: italic;
+        }
+        .blessing-text::before, .blessing-text::after {
+            content: '"';
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem; color: var(--rosa-pastel);
+            line-height: 0; vertical-align: middle;
+        }
+
+        .parents-section { margin: 25px 0; }
+        .parents-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem; color: var(--rosa-oscuro);
+            text-transform: uppercase; letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+        .parents-names {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.6rem; color: var(--purpura); font-weight: 700;
+        }
+        .parents-names span { display: inline-block; margin: 0 15px; }
+        .heart-icon {
+            color: var(--rosa-principal); font-size: 1.2rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.15); }
+            50% { transform: scale(1); }
+            75% { transform: scale(1.1); }
+        }
+
+        .honored-guest {
+            margin: 30px 0; padding: 20px;
+            background: linear-gradient(135deg, var(--rosa-claro), var(--purpura-claro));
+            border-radius: 20px; border: 2px solid var(--dorado-claro);
+        }
+        .honored-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem; color: var(--rosa-oscuro);
+            text-transform: uppercase; letter-spacing: 3px;
+            margin-bottom: 8px;
+        }
+        .honored-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.2rem; color: var(--rosa-principal);
+            text-shadow: 2px 2px 4px rgba(233, 30, 140, 0.2);
+        }
+
+        .event-details {
+            margin-top: 30px; padding: 25px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px; border: 1px dashed var(--rosa-pastel);
+        }
+        .event-date {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.5rem; color: var(--purpura);
+            font-weight: 700; margin-bottom: 15px;
+        }
+        .event-location {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; color: #666; line-height: 1.7;
+        }
+        .event-location strong {
+            color: var(--rosa-oscuro); font-size: 1.2rem;
+        }
+        .city-date {
+            margin-top: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem; color: var(--dorado);
+            font-weight: 700; letter-spacing: 2px;
+        }
+
+        .scroll-indicator {
+            margin-top: 30px; animation: bounce 2s infinite;
+        }
+        .scroll-indicator a {
+            color: var(--rosa-principal); text-decoration: none; font-size: 2rem;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* ===== CUENTA REGRESIVA ===== */
+        .countdown-section {
+            padding: 60px 20px 40px;
+            position: relative; z-index: 1;
+        }
+        .countdown-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px 30px;
+            max-width: 800px; margin: 0 auto;
+            box-shadow: 0 15px 50px rgba(233, 30, 140, 0.15);
+            border: 3px solid var(--dorado-claro);
+            text-align: center;
+        }
+        .countdown-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.8rem; color: var(--rosa-oscuro);
+            margin-bottom: 5px;
+        }
+        .countdown-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem; color: var(--dorado);
+            margin-bottom: 30px;
+        }
+        .countdown-container {
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 15px;
+        }
+        .countdown-item {
+            background: linear-gradient(135deg, var(--rosa-claro), var(--purpura-claro));
+            border-radius: 20px;
+            padding: 20px 15px;
+            min-width: 90px;
+            border: 2px solid var(--dorado-claro);
+            transition: transform 0.3s ease;
+        }
+        .countdown-item:hover {
+            transform: translateY(-5px);
+        }
+        .countdown-number {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.5rem; font-weight: 900;
+            background: linear-gradient(135deg, var(--rosa-principal), var(--purpura));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        .countdown-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.85rem; color: var(--rosa-oscuro);
+            text-transform: uppercase; letter-spacing: 2px;
+            margin-top: 8px;
+        }
+        .countdown-separator {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2rem; color: var(--dorado);
+            align-self: center;
+            display: none;
+        }
+        @media (min-width: 576px) {
+            .countdown-separator { display: block; }
+        }
+
+        /* ===== UBICACIÓN ===== */
+        .location-section {
+            padding: 60px 20px;
+            position: relative; z-index: 1;
+        }
+        .section-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 2.8rem; text-align: center;
+            color: var(--rosa-oscuro); margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .section-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem; text-align: center;
+            color: var(--dorado); margin-bottom: 40px;
+        }
+        .location-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px; overflow: hidden;
+            box-shadow: 0 15px 50px rgba(233, 30, 140, 0.15);
+            border: 3px solid var(--dorado-claro);
+            max-width: 900px; margin: 0 auto;
+        }
+        .map-container {
+            position: relative; width: 100%;
+            height: 400px; background: var(--rosa-claro);
+            overflow: hidden;
+        }
+        .map-container iframe {
+            width: 100%; height: 100%; border: none;
+        }
+        .location-info {
+            padding: 30px; text-align: center;
+        }
+        .location-icon {
+            font-size: 3rem; color: var(--rosa-principal); margin-bottom: 15px;
+        }
+        .location-name {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.8rem; color: var(--purpura); margin-bottom: 10px;
+        }
+        .location-address {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; color: #666; margin-bottom: 20px;
+        }
+        .btn-maps {
+            background: linear-gradient(135deg, var(--rosa-principal), var(--purpura));
+            color: white; border: none;
+            padding: 12px 35px; border-radius: 50px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500; font-size: 1rem;
+            text-decoration: none; display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(233, 30, 140, 0.3);
+        }
+        .btn-maps:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(233, 30, 140, 0.4);
+            color: white;
+        }
+
+        /* ===== VIDEO ===== */
+        .video-section {
+            padding: 60px 20px;
+            position: relative; z-index: 1;
+        }
+        .video-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px; overflow: hidden;
+            box-shadow: 0 15px 50px rgba(233, 30, 140, 0.15);
+            border: 3px solid var(--dorado-claro);
+            max-width: 900px; margin: 0 auto;
+        }
+        .video-container {
+            position: relative; width: 100%;
+            padding-bottom: 56.25%;
+            background: linear-gradient(135deg, #2a0a1a, #4a0e2e);
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%; border: none;
+        }
+        .video-placeholder {
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #2a0a1a, #4a0e2e);
+            color: white; cursor: pointer;
+            transition: opacity 0.5s ease;
+        }
+        .video-placeholder.hidden {
+            opacity: 0; pointer-events: none;
+        }
+        .play-button {
+            width: 90px; height: 90px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--rosa-principal), var(--purpura));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; color: white;
+            box-shadow: 0 0 30px rgba(233, 30, 140, 0.5);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .play-button:hover { transform: scale(1.1); box-shadow: 0 0 50px rgba(233, 30, 140, 0.7); }
+        .placeholder-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem; color: var(--rosa-pastel);
+        }
+        .video-info { padding: 30px; text-align: center; }
+        .video-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 1.6rem; color: var(--purpura); margin-bottom: 10px;
+        }
+        .video-desc {
+            font-family: 'Poppins', sans-serif;
+            color: #777; font-size: 0.95rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-section {
+            padding: 40px 20px; text-align: center;
+            position: relative; z-index: 1;
+        }
+        .footer-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2rem; color: var(--rosa-oscuro);
+        }
+        .footer-sub {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem; color: #999; margin-top: 10px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .title-15 { font-size: 3.5rem; }
+            .title-years { font-size: 1.8rem; }
+            .honored-name { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+            .invitation-card { padding: 30px 20px; }
+            .parents-names { font-size: 1.2rem; }
+            .parents-names span { display: block; margin: 5px 0; }
+            .blessing-text { font-size: 1rem; }
+            .map-container { height: 300px; }
+            .countdown-number { font-size: 2rem; }
+            .countdown-item { min-width: 70px; padding: 15px 10px; }
+        }
+
+        /* Animación de entrada */
+        .fade-in-up {
+            opacity: 0; transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        .fade-in-up.visible {
+            opacity: 1; transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+        .delay-4 { transition-delay: 0.8s; }
+    </style>
+</head>
+<body>
+    <!-- Fondo de estrellas -->
+    <div class="stars-bg" id="starsBg"></div>
+
+    <!-- ===== BOTÓN MÚSICA FLOTANTE ===== -->
+    <button class="music-btn" id="musicBtn" title="Reproducir música de fondo">
+        <div class="music-wave"></div>
+        <i class="bi bi-music-note-beamed" id="musicIcon"></i>
+    </button>
+
+    <!-- Audio de fondo -->
+    <audio id="bgMusic" loop>
+        <source src="musica-fondo.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <!-- ===== SECCIÓN 1: INVITACIÓN ===== -->
+    <section class="hero-section" id="inicio">
+        <div class="invitation-card">
+            <div class="card-content">
+                <i class="bi bi-gem top-crown"></i>
+
+                <div class="fade-in-up">
+                    <h1 class="title-15">15</h1>
+                    <p class="title-years">Años</p>
+                </div>
+
+                <div class="crown-divider fade-in-up delay-1">
+                    <i class="bi bi-stars"></i>
+                </div>
+
+                <p class="blessing-text fade-in-up delay-1">
+                    Hace 15 años Dios iluminó nuestro hogar con la llegada de nuestra hija que alegró nuestros corazones y hoy que la juventud llegará hacia ella le damos gracias a Dios.
+                </p>
+
+                <div class="parents-section fade-in-up delay-2">
+                    <p class="parents-label">Padres de la Quinceañera</p>
+                    <p class="parents-names">
+                        <span>Victor Hugo Mamani</span>
+                        <i class="bi bi-heart-fill heart-icon"></i>
+                        <span>Anahi Rodriguez</span>
+                    </p>
+                </div>
+
+                <div class="crown-divider fade-in-up delay-2">
+                    <i class="bi bi-stars"></i>
+                </div>
+
+                <div class="honored-guest fade-in-up delay-3">
+                    <p class="honored-label">Desean compartir con ustedes los 15 Años de su querida hija</p>
+                    <p class="honored-name">Alizon Mamani Rodriguez</p>
+                </div>
+
+                <div class="event-details fade-in-up delay-4">
+                    <p class="event-date">
+                        <i class="bi bi-calendar-heart" style="color: var(--rosa-principal);"></i>
+                        Sábado 16 de Septiembre · 16:00 p.m.
+                    </p>
+                    <p class="event-location">
+                        <strong>Salón de Eventos Sociales "J y M"</strong><br>
+                        Ubicado en el Campo Jordan y Calle 1
+                    </p>
+                    <p class="city-date">
+                        <i class="bi bi-geo-alt-fill"></i> Oruro, Septiembre 2026
+                    </p>
+                </div>
+
+                <div class="scroll-indicator">
+                    <a href="#countdown"><i class="bi bi-chevron-double-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN 2: CUENTA REGRESIVA ===== -->
+    <section class="countdown-section" id="countdown">
+        <div class="countdown-card fade-in-up">
+            <h2 class="countdown-title">Faltan</h2>
+            <p class="countdown-subtitle">para la gran celebración</p>
+
+            <div class="countdown-container" id="countdownContainer">
+                <div class="countdown-item">
+                    <div class="countdown-number" id="days">00</div>
+                    <div class="countdown-label">Días</div>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="hours">00</div>
+                    <div class="countdown-label">Horas</div>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="minutes">00</div>
+                    <div class="countdown-label">Minutos</div>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <div class="countdown-number" id="seconds">00</div>
+                    <div class="countdown-label">Segundos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN 3: UBICACIÓN ===== -->
+    <section class="location-section" id="ubicacion">
+        <h2 class="section-title fade-in-up">Ubicación</h2>
+        <p class="section-subtitle fade-in-up">Te esperamos aquí</p>
+
+        <div class="location-card fade-in-up">
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3799.0!2d-67.15!3d-17.97!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDU4JzEyLjAiUyA2N8KwMDknMDAuMCJX!5e0!3m2!1ses!2sbo!4v1699999999999!5m2!1ses!2sbo"
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <div class="location-info">
+                <i class="bi bi-geo-alt-fill location-icon"></i>
+                <h3 class="location-name">Salón de Eventos Sociales "J y M"</h3>
+                <p class="location-address">Campo Jordan y Calle 1, Oruro - Bolivia</p>
+                <a href="https://maps.app.goo.gl/4kDuszr3yL83HBDLA" target="_blank" class="btn-maps">
+                    <i class="bi bi-map-fill"></i> Ver en Google Maps
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SECCIÓN 4: VIDEO ===== -->
+    <section class="video-section" id="video">
+        <h2 class="section-title fade-in-up">Video de Invitación</h2>
+        <p class="section-subtitle fade-in-up">Un mensaje especial para ti</p>
+
+        <div class="video-card fade-in-up">
+            <div class="video-container" id="videoContainer">
+                <div class="video-placeholder" id="videoPlaceholder">
+                    <div class="play-button">
+                        <i class="bi bi-play-fill"></i>
+                    </div>
+                    <p class="placeholder-text">Toca para ver el video de invitación de Alizon</p>
+                    <p style="color: #888; font-size: 0.85rem; margin-top: 10px;">
+                        <i class="bi bi-youtube" style="color: #ff0000; margin-right: 5px;"></i>
+                        YouTube
+                    </p>
+                </div>
+            </div>
+            <div class="video-info">
+                <h3 class="video-title">Invitación Especial</h3>
+                <p class="video-desc">Alizon Mamani Rodriguez - Mis 15 Años</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-section">
+        <p class="footer-text">¡Te esperamos!</p>
+        <p class="footer-sub">Alizon Mamani Rodriguez · 15 Años · Septiembre 2026</p>
+        <div class="crown-divider" style="margin-top: 20px;">
+            <i class="bi bi-heart-fill" style="color: var(--rosa-principal); font-size: 1.5rem;"></i>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ===== GENERAR ESTRELLAS =====
+        const starsBg = document.getElementById('starsBg');
+        for (let i = 0; i < 60; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            const size = 2 + Math.random() * 4;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            starsBg.appendChild(star);
+        }
+
+        // ===== MÚSICA DE FONDO =====
+        const musicBtn = document.getElementById('musicBtn');
+        const musicIcon = document.getElementById('musicIcon');
+        const bgMusic = document.getElementById('bgMusic');
+        let isPlaying = false;
+
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicBtn.classList.remove('playing');
+                musicIcon.className = 'bi bi-music-note-beamed';
+                isPlaying = false;
+            } else {
+                bgMusic.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    musicIcon.className = 'bi bi-pause-fill';
+                    isPlaying = true;
+                }).catch(err => {
+                    console.log('Error al reproducir:', err);
+                    alert('No se pudo reproducir la música. Asegúrate de tener el archivo musica-fondo.mp3 en la misma carpeta que index.html');
+                });
+            }
+        });
+
+        // ===== CUENTA REGRESIVA CORREGIDA =====
+        function updateCountdown() {
+            // Fecha y hora exacta corregida: 16 de Septiembre de 2026 a las 16:00 PM
+            const targetDate = new Date('2026-09-16T16:00:00');
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').textContent = '00';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+                document.querySelector('.countdown-title').textContent = '¡Es Hoy!';
+                document.querySelector('.countdown-subtitle').textContent = '¡La gran celebración ha llegado!';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // ===== ANIMACIÓN DE ENTRADA (SCROLL) =====
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== VIDEO LAZY LOAD =====
+        const videoSection = document.getElementById('video');
+        const videoContainer = document.getElementById('videoContainer');
+        const videoPlaceholder = document.getElementById('videoPlaceholder');
+        const youtubeVideoId = 'qlBsuKNYOcU';
+        let videoLoaded = false;
+
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !videoLoaded) {
+                    videoLoaded = true;
+                    const iframe = document.createElement('iframe');
+                    iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?rel=0&modestbranding=1`;
+                    iframe.title = 'Video de Invitación - 15 Años Alizon Mamani Rodriguez';
+                    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+                    iframe.allowFullscreen = true;
+                    iframe.loading = 'lazy';
+
+                    videoPlaceholder.addEventListener('click', function() {
+                        videoPlaceholder.classList.add('hidden');
+                        iframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1`;
+                    });
+
+                    videoContainer.appendChild(iframe);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        videoObserver.observe(videoSection);
+
+        // ===== SMOOTH SCROLL =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
